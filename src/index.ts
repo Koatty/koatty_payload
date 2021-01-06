@@ -1,19 +1,33 @@
 /*
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
- * @LastEditors: linyyyang<linyyyang@tencent.com>
- * @LastEditTime: 2020-11-30 11:27:23
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-24 14:42:34
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
+import * as Koa from 'koa';
 import * as helper from "koatty_lib";
 import { DefaultLogger as logger } from "koatty_logger";
 import { Parse } from "./parse";
 
 /**
+ * Koatty Application
+ *
+ * @export
+ * @interface Application
+ */
+export interface Application {
+    rootPath: string;
+    config(propKey: string, type: string): any;
+    on(event: string, callback: () => void): any;
+    once(event: string, callback: () => void): any;
+}
+
+/**
  *
  *
- * @interface PayloadOptions
+ * @interface DefaultOptions
  */
 export interface PayloadOptions {
     extTypes: {
@@ -31,7 +45,7 @@ export interface PayloadOptions {
 }
 
 /** @type {*} */
-const defaultOptions = {
+const defaultOptions: PayloadOptions = {
     extTypes: {
         json: ['application/json'],
         form: ['application/x-www-form-urlencoded'],
@@ -50,12 +64,12 @@ const defaultOptions = {
  *
  * @export
  * @param {PayloadOptions} options
- * @param {*} app
+ * @param {*} app Koatty or Koa instance
  */
-export function payload(options: PayloadOptions, app: any) {
+export function Payload(options: PayloadOptions, app: Application): Koa.Middleware {
     options = { ...defaultOptions, ...options };
 
-    return async (ctx: any, next: Function) => {
+    return async (ctx: Koa.Context, next: Koa.Next) => {
         // cached
         helper.define(ctx, '_cache', {
             body: null,
