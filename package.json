@@ -42,15 +42,15 @@
         }
     ],
     "devDependencies": {
-        "@types/formidable": "^1.0.31",
+        "@types/formidable": "^1.2.2",
         "@types/inflation": "^2.0.0",
-        "@types/koa": "^2.11.6",
+        "@types/koa": "^2.x.x",
         "@types/node": "^12.x.x",
         "@types/on-finished": "^2.3.1",
-        "@types/xml2js": "^0.4.7",
+        "@types/xml2js": "^0.4.8",
         "del-cli": "^3.0.1",
-        "ts-node": "^9.0.0",
-        "tslint": "^6.1.3",
+        "ts-node": "^10.x.x",
+        "tslint": "^6.x.x",
         "tslint-config-alloy": "^0.2.1",
         "typescript": "^4.x.x"
     },
