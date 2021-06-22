@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:34:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-23 20:13:07
+ * @LastEditTime: 2021-06-22 14:07:49
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -77,12 +77,12 @@ function parseForm(ctx: any, opts: PayloadOptions) {
  * @returns {*}  
  */
 function parseMultipart(ctx: any, opts: PayloadOptions) {
-    const form = new IncomingForm();
-    form.encoding = opts.encoding;
-    form.multiples = opts.multiples;
-    form.keepExtensions = opts.keepExtensions;
-    // form.hash = opts.hash;
-    // form.uploadDir = opts.uploadDir;
+    
+    const form = new IncomingForm({
+        encoding: <BufferEncoding>opts.encoding,
+        multiples: opts.multiples,
+        keepExtensions: opts.keepExtensions,
+    });
 
     let uploadFiles: any = null;
     onFinished(ctx.res, () => {
