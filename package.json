@@ -1,6 +1,6 @@
 {
     "name": "koatty_payload",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "Payload parser for koatty.",
     "scripts": {
         "build": "del-cli --force dist && tsc",
