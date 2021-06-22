@@ -4,8 +4,12 @@
     "description": "Payload parser for koatty.",
     "scripts": {
         "build": "del-cli --force dist && tsc",
+        "eslint": "eslint --ext .ts,.js ./",
         "prepublishOnly": "npm test && npm run build",
-        "test": "tslint 'src/**/*.ts'"
+        "release": "standard-version",
+        "test": "npm run eslint && npm run build && jest --passWithNoTests",
+        "test:cov": "jest --collectCoverage --detectOpenHandles",
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
     },
     "main": "./dist/index.js",
     "repository": {
@@ -42,16 +46,29 @@
         }
     ],
     "devDependencies": {
+        "@commitlint/cli": "^12.x.x",
+        "@commitlint/config-conventional": "^12.x.x",
+        "@types/cls-hooked": "^4.x.x",
         "@types/formidable": "^1.2.2",
         "@types/inflation": "^2.0.0",
         "@types/koa": "^2.x.x",
         "@types/node": "^12.x.x",
         "@types/on-finished": "^2.3.1",
         "@types/xml2js": "^0.4.8",
-        "del-cli": "^3.0.1",
+        "@typescript-eslint/eslint-plugin": "^4.x.x",
+        "@typescript-eslint/parser": "^4.x.x",
+        "conventional-changelog-cli": "^2.x.x",
+        "del-cli": "^3.x.x",
+        "eslint": "^7.x.x",
+        "eslint-plugin-jest": "^24.x.x",
+        "husky": "^6.x.x",
+        "jest": "^27.x.x",
+        "jest-html-reporters": "^2.x.x",
+        "koatty_cacheable": "^1.x.x",
+        "koatty_schedule": "^1.x.x",
+        "standard-version": "^9.x.x",
+        "ts-jest": "^27.x.x",
         "ts-node": "^10.x.x",
-        "tslint": "^6.x.x",
-        "tslint-config-alloy": "^0.2.1",
         "typescript": "^4.x.x"
     },
     "dependencies": {
@@ -63,5 +80,10 @@
         "on-finished": "^2.3.0",
         "raw-body": "^2.4.1",
         "xml2js": "^0.4.23"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
     }
 }
