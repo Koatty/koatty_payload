@@ -2,27 +2,15 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-24 14:42:34
+ * @LastEditTime: 2021-07-12 11:56:57
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
 import * as Koa from 'koa';
 import * as helper from "koatty_lib";
+import { Koatty, KoattyContext } from "koatty_core";
 import { DefaultLogger as logger } from "koatty_logger";
 import { Parse } from "./parse";
-
-/**
- * Koatty Application
- *
- * @export
- * @interface Application
- */
-export interface Application {
-    rootPath: string;
-    config(propKey: string, type: string): any;
-    on(event: string, callback: () => void): any;
-    once(event: string, callback: () => void): any;
-}
 
 /**
  *
@@ -66,16 +54,10 @@ const defaultOptions: PayloadOptions = {
  * @param {PayloadOptions} options
  * @param {*} app Koatty or Koa instance
  */
-export function Payload(options: PayloadOptions, app: Application): Koa.Middleware {
+export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
     options = { ...defaultOptions, ...options };
 
-    return async (ctx: Koa.Context, next: Koa.Next) => {
-        // cached
-        helper.define(ctx, '_cache', {
-            body: null,
-            query: null
-        }, true);
-
+    return async (ctx: KoattyContext, next: Koa.Next) => {
         /**
          * request body parser
          *
@@ -83,15 +65,15 @@ export function Payload(options: PayloadOptions, app: Application): Koa.Middlewa
          * @param {any} value
          * @returns
          */
-        helper.define(ctx, 'bodyParser', function () {
-            if (!helper.isTrueEmpty(ctx._cache.body)) {
-                return ctx._cache.body;
+        helper.define(ctx, 'bodyParser', function (): any {
+            let body = ctx.getMetaData("_body");
+            if (!helper.isTrueEmpty(body)) {
+                return body;
             }
-            return Parse(ctx, options).then((res: {
-
-            }) => {
-                ctx._cache.body = res || {};
-                return ctx._cache.body;
+            return Parse(ctx, options).then((res: any) => {
+                body = res || {};
+                ctx.setMetaData("_body", body);
+                return body;
             }).catch((err: any) => {
                 logger.Error(err);
                 return {};
@@ -105,11 +87,14 @@ export function Payload(options: PayloadOptions, app: Application): Koa.Middlewa
          * @param {any} value
          * @returns
          */
-        helper.define(ctx, 'queryParser', function () {
-            if (helper.isTrueEmpty(ctx._cache.query)) {
-                ctx._cache.query = { ...(ctx.query), ...(ctx.params || {}) };
+        helper.define(ctx, 'queryParser', function (): any {
+            let query = ctx.getMetaData("_query");
+            if (!helper.isTrueEmpty(query)) {
+                return query;
             }
-            return ctx._cache.query;
+            query = { ...(ctx.query), ...(ctx.params || {}) };
+            ctx.setMetaData("_query", query);
+            return query;
         });
 
         return next();
