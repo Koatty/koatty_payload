@@ -1,6 +1,6 @@
 {
     "name": "koatty_payload",
-    "version": "1.3.2",
+    "version": "1.3.4",
     "description": "Payload parser for koatty.",
     "scripts": {
         "build": "del-cli --force dist && tsc",
@@ -64,22 +64,20 @@
         "husky": "^6.x.x",
         "jest": "^27.x.x",
         "jest-html-reporters": "^2.x.x",
-        "koatty_cacheable": "^1.x.x",
-        "koatty_schedule": "^1.x.x",
         "standard-version": "^9.x.x",
         "ts-jest": "^27.x.x",
         "ts-node": "^10.x.x",
         "typescript": "^4.x.x"
     },
     "dependencies": {
-        "formidable": "^1.2.2",
+        "formidable": "^2.0.1",
         "inflation": "^2.0.0",
         "koa": "^2.x.x",
         "koatty_core": "^1.x.x",
         "koatty_lib": "^1.x.x",
         "koatty_logger": "^1.x.x",
         "on-finished": "^2.3.0",
-        "raw-body": "^2.4.1",
+        "raw-body": "^2.4.2",
         "xml2js": "^0.4.23"
     },
     "husky": {
