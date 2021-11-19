@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:34:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-06-22 14:07:49
+ * @LastEditTime: 2021-11-19 23:53:50
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -12,7 +12,7 @@ import util from "util";
 import getRawBody from "raw-body";
 import inflate from "inflation";
 import { parseStringPromise } from "xml2js";
-import { IncomingForm } from "formidable";
+import { IncomingForm, BufferEncoding } from "formidable";
 import { PayloadOptions } from "./index";
 import onFinished from "on-finished";
 const fsUnlink = util.promisify(fs.unlink);
@@ -77,7 +77,7 @@ function parseForm(ctx: any, opts: PayloadOptions) {
  * @returns {*}  
  */
 function parseMultipart(ctx: any, opts: PayloadOptions) {
-    
+
     const form = new IncomingForm({
         encoding: <BufferEncoding>opts.encoding,
         multiples: opts.multiples,
