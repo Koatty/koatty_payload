@@ -2,13 +2,13 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-07-12 11:56:57
+ * @LastEditTime: 2021-11-23 14:28:20
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
-import * as Koa from 'koa';
+import Koa from "koa";
 import * as helper from "koatty_lib";
-import { Koatty, KoattyContext } from "koatty_core";
+import { Koatty, KoattyContext, KoattyNext } from "koatty_core";
 import { DefaultLogger as logger } from "koatty_logger";
 import { Parse } from "./parse";
 
@@ -57,7 +57,7 @@ const defaultOptions: PayloadOptions = {
 export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
     options = { ...defaultOptions, ...options };
 
-    return async (ctx: KoattyContext, next: Koa.Next) => {
+    return async (ctx: KoattyContext, next: KoattyNext) => {
         /**
          * request body parser
          *
