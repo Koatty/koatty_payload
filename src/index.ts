@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-23 14:28:20
+ * @LastEditTime: 2021-11-26 16:05:00
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -65,19 +65,20 @@ export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
          * @param {any} value
          * @returns
          */
-        helper.define(ctx, 'bodyParser', function (): any {
+        helper.define(ctx, 'bodyParser', async function (): Promise<any> {
             let body = ctx.getMetaData("_body");
             if (!helper.isTrueEmpty(body)) {
                 return body;
             }
-            return Parse(ctx, options).then((res: any) => {
+            try {
+                const res = await Parse(ctx, options);
                 body = res || {};
                 ctx.setMetaData("_body", body);
                 return body;
-            }).catch((err: any) => {
+            } catch (err) {
                 logger.Error(err);
                 return {};
-            });
+            }
         });
 
         /**
