@@ -81,8 +81,8 @@
         "inflation": "^2.0.0",
         "koatty_core": "^1.x.x",
         "koatty_lib": "^1.x.x",
-        "on-finished": "^2.3.0",
-        "raw-body": "^2.4.3",
+        "on-finished": "^2.4.1",
+        "raw-body": "^2.5.1",
         "xml2js": "^0.4.23"
     },
     "peerDependencies": {
