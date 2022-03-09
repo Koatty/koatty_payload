@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-02-10 14:42:39
+ * @LastEditTime: 2022-03-09 18:41:48
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -90,7 +90,7 @@ export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
          */
         helper.define(ctx, 'queryParser', function (): any {
             let query = ctx.getMetaData("_query");
-            if (!helper.isTrueEmpty(query) || (helper.isArray(query) && query.length > 0)) {
+            if (!helper.isTrueEmpty(query) && (helper.isArray(query) && query.length > 0)) {
                 return query;
             }
             query = { ...(ctx.query), ...(ctx.params || {}) };
