@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.17](https://github.com/thinkkoa/koatty_payload/compare/v1.3.16...v1.3.17) (2022-03-22)
+
+
+### Bug Fixes
+
+* 拦截参数解析异常 ([5835c50](https://github.com/thinkkoa/koatty_payload/commit/5835c5081f5ce0ec5f57d907a57c3db0643d343e))
+
 ### [1.3.16](https://github.com/thinkkoa/koatty_payload/compare/v1.3.15...v1.3.16) (2022-03-14)
 
 ### [1.3.15](https://github.com/thinkkoa/koatty_payload/compare/v1.3.14...v1.3.15) (2022-03-09)
