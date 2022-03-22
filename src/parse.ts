@@ -2,19 +2,21 @@
  * @Author: richen
  * @Date: 2020-11-27 17:34:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-11-19 23:53:50
+ * @LastEditTime: 2022-03-22 10:06:07
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
 import fs from "fs";
-import qs from "querystring";
+import { parse } from "querystring";
 import util from "util";
 import getRawBody from "raw-body";
 import inflate from "inflation";
 import { parseStringPromise } from "xml2js";
 import { IncomingForm, BufferEncoding } from "formidable";
+import { DefaultLogger as Logger } from "koatty_logger";
 import { PayloadOptions } from "./index";
 import onFinished from "on-finished";
+import { KoattyContext } from "koatty_core";
 const fsUnlink = util.promisify(fs.unlink);
 const fsAccess = util.promisify(fs.access);
 /**
@@ -25,7 +27,7 @@ const fsAccess = util.promisify(fs.access);
  * @param {*} options
  * @returns {*}  
  */
-export function Parse(ctx: any, options: PayloadOptions) {
+export function Parse(ctx: KoattyContext, options: PayloadOptions) {
     const methods = ['POST', 'PUT', 'DELETE', 'PATCH', 'LINK', 'UNLINK'];
     if (methods.every((method: string) => ctx.method !== method)) {
         return Promise.resolve({});
@@ -61,22 +63,29 @@ export function Parse(ctx: any, options: PayloadOptions) {
 /**
  * parse form
  *
- * @param {*} ctx
+ * @param {KoattyContext} ctx
  * @param {PayloadOptions} opts
  * @returns {*}  
  */
-function parseForm(ctx: any, opts: PayloadOptions) {
-    return parseText(ctx, opts).then((str: string) => qs.parse(str)).then((data: any) => ({ post: data }));
+async function parseForm(ctx: KoattyContext, opts: PayloadOptions) {
+    try {
+        const str = await parseText(ctx, opts);
+        const data = parse(str);
+        return { post: data };
+    } catch (error) {
+        Logger.Error(error);
+        return { post: {} };
+    }
 }
 
 /**
  * parse multipart
  *
- * @param {*} ctx
+ * @param {KoattyContext} ctx
  * @param {PayloadOptions} opts
  * @returns {*}  
  */
-function parseMultipart(ctx: any, opts: PayloadOptions) {
+function parseMultipart(ctx: KoattyContext, opts: PayloadOptions) {
 
     const form = new IncomingForm({
         encoding: <BufferEncoding>opts.encoding,
@@ -90,13 +99,15 @@ function parseMultipart(ctx: any, opts: PayloadOptions) {
             return;
         }
         Object.keys(uploadFiles).forEach((key: string) => {
-            fsAccess(uploadFiles[key].path).then(() => fsUnlink(uploadFiles[key].path)).catch(() => { });
+            fsAccess(uploadFiles[key].path).then(() => fsUnlink(uploadFiles[key].path)).catch((err) => Logger.Error(err));
         });
     });
     return new Promise((resolve, reject) => {
         form.parse(ctx.req, function (err, fields, files) {
             if (err) {
-                return reject(err);
+                // return reject(err);
+                Logger.Error(err);
+                return resolve({ post: {}, file: {} });
             }
             uploadFiles = files;
             return resolve({
@@ -110,26 +121,35 @@ function parseMultipart(ctx: any, opts: PayloadOptions) {
 /**
  * parse json
  *
- * @param {*} ctx
+ * @param {KoattyContext} ctx
  * @param {PayloadOptions} opts
  * @returns {*}  
  */
-function parseJson(ctx: any, opts: PayloadOptions) {
-    return parseText(ctx, opts).then((str: string) => JSON.parse(str)).then((data: any) => ({ post: data }));
+async function parseJson(ctx: KoattyContext, opts: PayloadOptions) {
+    try {
+        const str = await parseText(ctx, opts);
+        const data = JSON.parse(str);
+        return { post: data };
+    } catch (error) {
+        Logger.Error(error);
+        return { post: {} };
+    }
 }
 
 /**
  * parse text
  *
- * @param {*} ctx
+ * @param {KoattyContext} ctx
  * @param {PayloadOptions} opts
  * @returns {*}  {Promise<string>}
  */
-function parseText(ctx: any, opts: PayloadOptions): Promise<string> {
+function parseText(ctx: KoattyContext, opts: PayloadOptions): Promise<string> {
     return new Promise((resolve, reject) => {
         getRawBody(inflate(ctx.req), opts, function (err: any, body: string) {
             if (err) {
-                reject(err);
+                // reject(err);
+                Logger.Error(err);
+                return resolve("");
             }
             resolve(body);
         });
@@ -139,10 +159,17 @@ function parseText(ctx: any, opts: PayloadOptions): Promise<string> {
 /**
  * parse xml
  *
- * @param {*} ctx
+ * @param {KoattyContext} ctx
  * @param {PayloadOptions} opts
  * @returns {*}  
  */
-function parseXml(ctx: any, opts: PayloadOptions) {
-    return parseText(ctx, opts).then((str: string) => parseStringPromise(str)).then((data: any) => ({ post: data }));
+async function parseXml(ctx: KoattyContext, opts: PayloadOptions) {
+    try {
+        const str = await parseText(ctx, opts);
+        const data = await parseStringPromise(str);
+        return { post: data };
+    } catch (error) {
+        Logger.Error(error);
+        return { post: {} };
+    }
 }
