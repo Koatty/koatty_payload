@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-14 11:13:13
+ * @LastEditTime: 2022-03-22 10:01:17
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -26,7 +26,7 @@ export interface PayloadOptions {
         xml: string[],
     };
     limit: string;
-    encoding: string;
+    encoding: BufferEncoding;
     multiples: boolean;
     keepExtensions: boolean;
     length?: number;
