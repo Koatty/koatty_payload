@@ -12,13 +12,7 @@
         "prepublishOnly": "npm test && npm run build",
         "prerelease": "npm test && npm run build",
         "release": "standard-version",
-        "release:pre": "npm run release -- --prerelease",
-        "release:major": "npm run release -- --release-as major",
-        "release:minor": "npm run release -- --release-as minor",
-        "pub": "git push --follow-tags origin && npm publish",
-        "test": "npm run eslint && jest --passWithNoTests",
-        "test:cov": "jest --collectCoverage --detectOpenHandles",
-        "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
+        "test": "npm run eslint && jest --passWithNoTests"
     },
     "main": "./dist/index.js",
     "exports": {
