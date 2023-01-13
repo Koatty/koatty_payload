@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/thinkkoa/koatty_payload/compare/v1.3.18...v1.4.0) (2023-01-13)
+
+
+### Bug Fixes
+
+* package.json ([216697d](https://github.com/thinkkoa/koatty_payload/commit/216697da644f6a9cbad79b12b59c919ed6f70414))
+* upgrade deps ([62a79c5](https://github.com/thinkkoa/koatty_payload/commit/62a79c55c8b2d3210cc63c2ac3f1d539ebc7371b))
+
 ### [1.3.18](https://github.com/thinkkoa/koatty_payload/compare/v1.3.17...v1.3.18) (2022-05-26)
 
 ### [1.3.17](https://github.com/thinkkoa/koatty_payload/compare/v1.3.16...v1.3.17) (2022-03-22)
