@@ -2,7 +2,7 @@
  * @Author: richen
  * @Date: 2020-11-27 17:07:25
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-03-22 10:01:17
+ * @LastEditTime: 2023-02-26 13:51:51
  * @License: BSD (3-Clause)
  * @Copyright (c) - <richenlin(at)gmail.com>
  */
@@ -56,7 +56,6 @@ const defaultOptions: PayloadOptions = {
  */
 export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
     options = { ...defaultOptions, ...options };
-
     return async (ctx: KoattyContext, next: KoattyNext) => {
         /**
          * request body parser
@@ -66,7 +65,7 @@ export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
          * @returns
          */
         helper.define(ctx, 'bodyParser', async function (): Promise<any> {
-            let body = ctx.getMetaData("_body");
+            let body = ctx.getMetaData("_body")[0];
             if (!helper.isEmpty(body)) {
                 return body;
             }
@@ -89,7 +88,7 @@ export function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware {
          * @returns
          */
         helper.define(ctx, 'queryParser', function (): any {
-            let query = ctx.getMetaData("_query");
+            let query = ctx.getMetaData("_query")[0];
             if (!helper.isEmpty(query)) {
                 return query;
             }
