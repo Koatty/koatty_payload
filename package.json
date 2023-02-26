@@ -1,6 +1,6 @@
 {
   "name": "koatty_payload",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Payload parser for koatty.",
   "scripts": {
     "build": "npm run build:js && npm run build:dts && npm run build:doc && npm run build:cp",
@@ -61,9 +61,13 @@
     "@microsoft/api-documenter": "^7.x.x",
     "@microsoft/api-extractor": "^7.x.x",
     "@rollup/plugin-json": "^6.x.x",
+    "@types/formidable": "^2.0.5",
+    "@types/inflation": "^2.0.1",
     "@types/jest": "^29.x.x",
     "@types/koa": "^2.x.x",
     "@types/node": "^18.x.x",
+    "@types/on-finished": "^2.3.1",
+    "@types/xml2js": "^0.4.11",
     "@typescript-eslint/eslint-plugin": "^5.x.x",
     "@typescript-eslint/parser": "^5.x.x",
     "conventional-changelog-cli": "^2.x.x",
