@@ -4,7 +4,7 @@
 
 ## PayloadOptions.keepExtensions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 keepExtensions: boolean;

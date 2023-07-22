@@ -4,7 +4,7 @@
 
 ## PayloadOptions.limit property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 limit: string;

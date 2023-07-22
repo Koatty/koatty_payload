@@ -4,7 +4,7 @@
 
 ## PayloadOptions.multiples property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 multiples: boolean;

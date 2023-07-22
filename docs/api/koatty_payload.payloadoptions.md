@@ -6,7 +6,7 @@
 
  DefaultOptions
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PayloadOptions 
@@ -14,12 +14,12 @@ export interface PayloadOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [encoding](./koatty_payload.payloadoptions.encoding.md) | BufferEncoding |  |
-|  [extTypes](./koatty_payload.payloadoptions.exttypes.md) | { json: string\[\]; form: string\[\]; text: string\[\]; multipart: string\[\]; xml: string\[\]; } |  |
-|  [keepExtensions](./koatty_payload.payloadoptions.keepextensions.md) | boolean |  |
-|  [length?](./koatty_payload.payloadoptions.length.md) | number | <i>(Optional)</i> |
-|  [limit](./koatty_payload.payloadoptions.limit.md) | string |  |
-|  [multiples](./koatty_payload.payloadoptions.multiples.md) | boolean |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [encoding](./koatty_payload.payloadoptions.encoding.md) |  | BufferEncoding |  |
+|  [extTypes](./koatty_payload.payloadoptions.exttypes.md) |  | { json: string\[\]; form: string\[\]; text: string\[\]; multipart: string\[\]; xml: string\[\]; } |  |
+|  [keepExtensions](./koatty_payload.payloadoptions.keepextensions.md) |  | boolean |  |
+|  [length?](./koatty_payload.payloadoptions.length.md) |  | number | _(Optional)_ |
+|  [limit](./koatty_payload.payloadoptions.limit.md) |  | string |  |
+|  [multiples](./koatty_payload.payloadoptions.multiples.md) |  | boolean |  |
 

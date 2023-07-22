@@ -4,7 +4,7 @@
 
 ## PayloadOptions.encoding property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 encoding: BufferEncoding;

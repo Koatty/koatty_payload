@@ -4,7 +4,7 @@
 
 ## PayloadOptions.length property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 length?: number;

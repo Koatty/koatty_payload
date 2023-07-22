@@ -5,7 +5,7 @@
 ## Payload() function
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function Payload(options: PayloadOptions, app: Koatty): Koa.Middleware;
@@ -18,7 +18,7 @@ export declare function Payload(options: PayloadOptions, app: Koatty): Koa.Middl
 |  options | [PayloadOptions](./koatty_payload.payloadoptions.md) |  |
 |  app | Koatty | Koatty or Koa instance |
 
-<b>Returns:</b>
+**Returns:**
 
 Koa.Middleware
 

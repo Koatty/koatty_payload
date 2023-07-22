@@ -4,7 +4,7 @@
 
 ## PayloadOptions.extTypes property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extTypes: {
