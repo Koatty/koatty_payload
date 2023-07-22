@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/thinkkoa/koatty_payload/compare/v1.4.4...v1.4.5) (2023-07-22)
+
 ### [1.4.4](https://github.com/thinkkoa/koatty_payload/compare/v1.4.2...v1.4.4) (2023-05-23)
 
 ### [1.4.2](https://github.com/thinkkoa/koatty_payload/compare/v1.4.0...v1.4.2) (2023-02-26)
